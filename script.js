@@ -38,7 +38,7 @@ function submitBook() {
     let title = newBookTitle.value;
     let author = newBookAuthor.value;
     let pageNumber = newBookPages.value;
-    let beenRead = bookReadTrue ? true : false;
+    let beenRead = bookReadTrue.checked ? true : false;
     let newBook = new Book(title, author, pageNumber, beenRead);
     addBookToLibrary(newBook);
     main.removeChild(bookForm);

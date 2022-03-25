@@ -56,6 +56,24 @@ function createCardGrid() {
     }
 }
 
+function changeReadStatus(index, element) {
+    if (element.getAttribute('src') === './icons/read-true.svg') {
+        element.setAttribute('src', `./icons/read-false.svg`);
+        element.classList.replace('book-read-true', 'book-read-false');
+        myLibrary[index].beenRead = false;
+    }
+    else {
+        element.setAttribute('src', `./icons/read-true.svg`);
+        element.classList.replace('book-read-false', 'book-read-true');
+        myLibrary[index].beenRead = true;
+    }
+}
+
+function removeItem (index, item) {
+    container.removeChild(item);
+    myLibrary.splice(index, 1);
+}
+
 function addCard(book, index) {
     const card = document.createElement('div');
     card.classList.add('card');
@@ -75,8 +93,14 @@ function addCard(book, index) {
     const beenReadImage = document.createElement('img');
     beenReadImage.setAttribute('src', `./icons/read-${book.beenRead}.svg`);
     beenReadImage.classList.add(`book-read-${book.beenRead}`);
+    beenReadImage.addEventListener('click', () => changeReadStatus(index, beenReadImage));
     bookBeenRead.appendChild(beenReadImage);
     card.appendChild(bookBeenRead);
+    const deleteItem = document.createElement('img');
+    deleteItem.setAttribute('src', './icons/trash-can-outline.svg');
+    deleteItem.classList.add('remove-item');
+    deleteItem.addEventListener('click', () => removeItem(index, card));
+    card.appendChild(deleteItem);
 }
 
 let myLibrary = [];

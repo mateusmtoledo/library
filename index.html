@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library</title>
     <script src="script.js" defer></script>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header>
-        <button class="add-book" type="button">+</button>
-        <p>LIBRARY</p>
+      <button class="add-book" type="button">+</button>
+      <p>LIBRARY</p>
     </header>
-</body>
+
+    <main>
+      <div class="new-book">
+        <form>
+            <h3>Add New Book</h3>
+            <p>
+              <label for="book-title">Title:</label>
+              <input type="text" id="book-title">
+            </p>
+            <p>
+                <label for="book-author">Author:</label>
+                <input type="text" id="book-author">
+            </p>
+            <p>
+                <label for="book-pages">Number of Pages:</label>
+                <input type="number" id="book-pages">
+            </p>
+            <fieldset>
+                <legend>Have you read this book?</legend>
+                <p>
+                    <input type="radio" name="book-read" id="book-read-true" value="true">
+                    <label for="book-read-true">Yes</label>
+                </p>
+                <p>
+                    <input type="radio" name="book-read" id="book-read-false" value="false">
+                    <label for="book-read-false">No</label>
+                </p>
+            </fieldset>
+            <div class="buttons">
+                <button type="button">Cancel</button>
+                <button type="button">Add</button>
+            </div>
+        </form>
+      </div>
+    </main>
+  </body>
 </html>

@@ -11,6 +11,7 @@ function addBookToLibrary(newBook) {
 
 function displayBookForm() {
     main.appendChild(bookForm);
+    main.removeChild(addBook);
 }
 
 function clearForm() {
@@ -24,6 +25,7 @@ function clearForm() {
 function cancelForm() {
     main.removeChild(bookForm);
     clearForm();
+    main.appendChild(addBook);
 }
 
 function submitBook() {
@@ -43,10 +45,43 @@ function submitBook() {
     addBookToLibrary(newBook);
     main.removeChild(bookForm);
     clearForm();
+    createCardGrid();
+    main.appendChild(addBook);
+}
+
+function createCardGrid() {
+    for (let i = 0; i < myLibrary.length; i++) {
+        if(document.getElementById(`card-${i}`) !== null) continue;
+        addCard(myLibrary[i], i);
+    }
+}
+
+function addCard(book, index) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.setAttribute('id', `card-${index}`);
+    container.appendChild(card);
+    const bookTitle = document.createElement('h2');
+    bookTitle.textContent = `${book.title}`;
+    card.appendChild(bookTitle);
+    const bookAuthor = document.createElement('p');
+    bookAuthor.textContent = `Author: ${book.author}`;
+    card.appendChild(bookAuthor);
+    const bookPageNumber = document.createElement('p');
+    bookPageNumber.textContent = `Pages: ${book.pageNumber}`;
+    card.appendChild(bookPageNumber);
+    const bookBeenRead = document.createElement('p');
+    bookBeenRead.textContent = 'Read: ';
+    const beenReadImage = document.createElement('img');
+    beenReadImage.setAttribute('src', `./icons/read-${book.beenRead}.svg`);
+    beenReadImage.classList.add(`book-read-${book.beenRead}`);
+    bookBeenRead.appendChild(beenReadImage);
+    card.appendChild(bookBeenRead);
 }
 
 let myLibrary = [];
 
+const container = document.querySelector('.container');
 const bookForm = document.querySelector('.new-book');
 const main = document.querySelector('main');
 const addBook = document.querySelector('.add-book');

@@ -50,8 +50,10 @@ function submitBook() {
 }
 
 function createCardGrid() {
+    while(container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
     for (let i = 0; i < myLibrary.length; i++) {
-        if(document.getElementById(`card-${i}`) !== null) continue;
         addCard(myLibrary[i], i);
     }
 }
@@ -70,8 +72,8 @@ function changeReadStatus(index, element) {
 }
 
 function removeItem (index, item) {
-    container.removeChild(item);
     myLibrary.splice(index, 1);
+    createCardGrid();
 }
 
 function addCard(book, index) {

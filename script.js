@@ -1,54 +1,56 @@
-function Book(title, author, pageNumber, beenRead) {
-    this.title = title
-    this.author = author
-    this.pageNumber = pageNumber
-    this.beenRead = beenRead;
-}
-
-Book.prototype.addCard = function() {
-    this.card = document.createElement('div');
-    this.card.classList.add('card');
-    container.appendChild(this.card);
-    const bookTitle = document.createElement('h2');
-    bookTitle.textContent = `${this.title}`;
-    this.card.appendChild(bookTitle);
-    const bookAuthor = document.createElement('p');
-    bookAuthor.textContent = `Author: ${this.author}`;
-    this.card.appendChild(bookAuthor);
-    const bookPageNumber = document.createElement('p');
-    bookPageNumber.textContent = `Pages: ${this.pageNumber}`;
-    this.card.appendChild(bookPageNumber);
-    const bookBeenRead = document.createElement('p');
-    bookBeenRead.textContent = 'Read: ';
-    const beenReadImage = document.createElement('img');
-    beenReadImage.setAttribute('src', `./icons/read-${this.beenRead}.svg`);
-    beenReadImage.classList.add(`book-read-${this.beenRead}`);
-    bookBeenRead.appendChild(beenReadImage);
-    this.card.appendChild(bookBeenRead);
-    beenReadImage.addEventListener('click', this.changeReadStatus.bind(this));
-    const deleteItem = document.createElement('img');
-    deleteItem.setAttribute('src', './icons/trash-can-outline.svg');
-    deleteItem.classList.add('remove-item');
-    deleteItem.addEventListener('click', this.removeItem.bind(this));
-    this.card.appendChild(deleteItem);
-}
-
-Book.prototype.removeItem = function() {
-    myLibrary.splice(myLibrary.indexOf(this), 1);
-    createCardGrid();
-}
-
-Book.prototype.changeReadStatus = function() {
-    const element = this.card.querySelector('p img');
-    if (this.beenRead === true) {
-        element.setAttribute('src', `./icons/read-false.svg`);
-        element.classList.replace('book-read-true', 'book-read-false');
-        this.beenRead = false;
+class Book {
+    constructor(title, author, pageNumber, beenRead) {
+        this.title = title
+        this.author = author
+        this.pageNumber = pageNumber
+        this.beenRead = beenRead;
     }
-    else {
-        element.setAttribute('src', `./icons/read-true.svg`);
-        element.classList.replace('book-read-false', 'book-read-true');
-        this.beenRead = true;
+
+    addCard() {
+        this.card = document.createElement('div');
+        this.card.classList.add('card');
+        container.appendChild(this.card);
+        const bookTitle = document.createElement('h2');
+        bookTitle.textContent = `${this.title}`;
+        this.card.appendChild(bookTitle);
+        const bookAuthor = document.createElement('p');
+        bookAuthor.textContent = `Author: ${this.author}`;
+        this.card.appendChild(bookAuthor);
+        const bookPageNumber = document.createElement('p');
+        bookPageNumber.textContent = `Pages: ${this.pageNumber}`;
+        this.card.appendChild(bookPageNumber);
+        const bookBeenRead = document.createElement('p');
+        bookBeenRead.textContent = 'Read: ';
+        const beenReadImage = document.createElement('img');
+        beenReadImage.setAttribute('src', `./icons/read-${this.beenRead}.svg`);
+        beenReadImage.classList.add(`book-read-${this.beenRead}`);
+        bookBeenRead.appendChild(beenReadImage);
+        this.card.appendChild(bookBeenRead);
+        beenReadImage.addEventListener('click', this.changeReadStatus.bind(this));
+        const deleteItem = document.createElement('img');
+        deleteItem.setAttribute('src', './icons/trash-can-outline.svg');
+        deleteItem.classList.add('remove-item');
+        deleteItem.addEventListener('click', this.removeItem.bind(this));
+        this.card.appendChild(deleteItem);
+    }
+
+    removeItem() {
+        myLibrary.splice(myLibrary.indexOf(this), 1);
+        createCardGrid();
+    }
+
+    changeReadStatus() {
+        const element = this.card.querySelector('p img');
+        if (this.beenRead === true) {
+            element.setAttribute('src', `./icons/read-false.svg`);
+            element.classList.replace('book-read-true', 'book-read-false');
+            this.beenRead = false;
+        }
+        else {
+            element.setAttribute('src', `./icons/read-true.svg`);
+            element.classList.replace('book-read-false', 'book-read-true');
+            this.beenRead = true;
+        }
     }
 }
 
